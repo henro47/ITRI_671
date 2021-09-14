@@ -7,7 +7,26 @@
     <body>
         <form action="{% url 'predict' %}">
             {% csrf_token %}
+
+            Temp_h: <input type="text" required name="t_h"> <br> <br>
+            Temp_p: <input type="text" required name="t_p"> <br> <br>
+            Pressure: <input type="text" required name="pr"> <br> <br>
+            Humidity: <input type="text" required name="hu"> <br> <br>
+            yaw: <input type="text" required name="yw"> <br> <br>
+            pitch: <input type="text" required name="pi"> <br> <br>
+            roll: <input type="text" required name="ro"> <br> <br>
+            mag_x: <input type="text" required name="m_x"> <br> <br>
+            mag_y: <input type="text" required name="m_y"> <br> <br>
+            mag_z: <input type="text" required name="m_z"> <br> <br>
+            acc_x: <input type="text" required name="acc_x"> <br> <br>
+            acc_y: <input type="text" required name="acc_y"> <br> <br>
+            acc_z: <input type="text" required name="acc_z"> <br> <br>
+            gyro_x: <input type="text" required name="gy_x"> <br> <br>
+            gyro_y: <input type="text" required name="gy_y"> <br> <br>
+            gyro_z: <input type="text" required name="gy_z"> <br> <br>
+
             <input type="submit" name="" value="submit">
+
         </form>
     </body>
 </html>
