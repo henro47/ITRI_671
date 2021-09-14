@@ -11,10 +11,10 @@
     <title>Terrain Classifer</title>
   </head>
   <body>
-    <form action="{% url 'predict' %}">
+    <div class="container-fluid">
+      <form action="{% url 'predict' %}">
         {% csrf_token %}
-
-        <div class="card" style="width: 18rem;">
+        <div class="card">
             <div class="card-body">
               <h5 class="card-title">Terrain Classifer</h5>
               <h6 class="card-subtitle mb-2 text-muted">Enter the appropriate values</h6>
@@ -118,7 +118,9 @@
               <input type="submit" name="" value="submit">
             </div>
           </div>
-    </form>
+      </form>
+    </div>
+    
 
     <!--Bootstrap bundle-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
