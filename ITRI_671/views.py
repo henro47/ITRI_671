@@ -13,7 +13,7 @@ BATCH_SIZE = 224
 
 def load_model(model_path):
     try:
-        model = keras.models.load_model('ITRI_671\keras_model')
+        model = keras.models.load_model(model_path)
         return model
     except:
         print('failed to load model')
@@ -32,7 +32,7 @@ def predict(model, data):
     return predictions
 
 def get_category(index):
-
+    img_path = ''
     if(index == 0):
         return 'Bricks'
     elif(index == 1):
@@ -52,8 +52,7 @@ def home(request):
     return render(request, 'home.html')
 
 def prediction(request):
-    model = load_model('keras_model')
-    model.summary()
+    model = load_model('ITRI_671\keras_model')
     input_data = []
 
     input_data.append(float(request.GET.get('t_h',1)))
@@ -74,11 +73,10 @@ def prediction(request):
     input_data.append(float(request.GET.get('gy_z',1)))
 
     df = pd.DataFrame([input_data])
-    print(df.head())
     pred = predict(model, df)
-   
-    index = np.where(np.amax(pred))
-    category = get_category(index[0])
+    
+    index = tf.argmax(pred, axis=1)
+    category = get_category(index)
     
     return render(request, "prediction.html", {'results':category})
 
