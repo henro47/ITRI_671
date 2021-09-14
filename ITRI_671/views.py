@@ -31,6 +31,20 @@ def predict(model, data):
     predictions = model.predict(x=data, batch_size=BATCH_SIZE, verbose=0)
     return predictions
 
+def get_category(index):
+
+    if(index == 0):
+        return 'Bricks'
+    elif(index == 1):
+        return 'Epoxy'
+    elif(index == 2):
+        return 'Grass'
+    elif(index == 3):
+        return 'Dirt'
+    elif(index == 4):
+        return 'Stone'
+    elif(index == 5):
+        return 'Tarmac'
 
 #VIEWS
 
@@ -62,7 +76,10 @@ def prediction(request):
     df = pd.DataFrame([input_data])
     print(df.head())
     pred = predict(model, df)
-    print(pred)
-    return render(request, "prediction.html")
+   
+    index = np.where(np.amax(pred))
+    category = get_category(index[0])
+    
+    return render(request, "prediction.html", {'results':category})
 
 	

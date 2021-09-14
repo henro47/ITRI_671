@@ -1,32 +1,128 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
-        <form action="{% url 'predict' %}">
-            {% csrf_token %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            Temp_h: <input type="text" required name="t_h"> <br> <br>
-            Temp_p: <input type="text" required name="t_p"> <br> <br>
-            Pressure: <input type="text" required name="pr"> <br> <br>
-            Humidity: <input type="text" required name="hu"> <br> <br>
-            yaw: <input type="text" required name="yw"> <br> <br>
-            pitch: <input type="text" required name="pi"> <br> <br>
-            roll: <input type="text" required name="ro"> <br> <br>
-            mag_x: <input type="text" required name="m_x"> <br> <br>
-            mag_y: <input type="text" required name="m_y"> <br> <br>
-            mag_z: <input type="text" required name="m_z"> <br> <br>
-            acc_x: <input type="text" required name="acc_x"> <br> <br>
-            acc_y: <input type="text" required name="acc_y"> <br> <br>
-            acc_z: <input type="text" required name="acc_z"> <br> <br>
-            gyro_x: <input type="text" required name="gy_x"> <br> <br>
-            gyro_y: <input type="text" required name="gy_y"> <br> <br>
-            gyro_z: <input type="text" required name="gy_z"> <br> <br>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-            <input type="submit" name="" value="submit">
+    <title>Terrain Classifer</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <form action="{% url 'predict' %}">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Terrain Classifer</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Enter the appropriate values</h6>
 
-        </form>
-    </body>
+              <!--Temp_h input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Temperature_h</span>
+                <input type="text" required name="t_h" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Temp_p input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Temperature_p</span>
+                <input type="text" required name="t_p" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+               <!--Pressure input field-->
+               <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Pressure</span>
+                <input type="text" required name="pr" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+               <!--Humidity input field-->
+               <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Humidity</span>
+                <input type="text" required name="hu" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Yaw input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Yaw</span>
+                <input type="text" required name="yw" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              
+              <!--Pitch input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Pitch</span>
+                <input type="text" required name="pi" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+               <!--Roll input field-->
+               <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Roll</span>
+                <input type="text" required name="ro" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Mag_x input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Mag_x</span>
+                <input type="text" required name="m_x" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Mag_y input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Mag_y</span>
+                <input type="text" required name="m_y" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Mag_z input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Mag_y</span>
+                <input type="text" required name="m_z" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Acc_x input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Acc_x</span>
+                <input type="text" required name="acc_x" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Acc_y input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Acc_y</span>
+                <input type="text" required name="acc_y" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Acc_z input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Acc_z</span>
+                <input type="text" required name="acc_z" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Gyro_x input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Gyro_x</span>
+                <input type="text" required name="gy_x" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Gyro_y input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Gyro_y</span>
+                <input type="text" required name="gy_y" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <!--Gyro_z input field-->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Gyro_z</span>
+                <input type="text" required name="gy_z" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <input type="submit" name="" value="submit">
+            </div>
+          </div>
+      </form>
+    </div>
+    
+
+    <!--Bootstrap bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
 </html>
