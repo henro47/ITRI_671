@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <title>Terrain Classifer Results</title>
   </head>
   <body>
@@ -16,9 +16,9 @@
         <div class="card">
             <div class="card-body">
               <h5 class="card-title">Result</h5>
-              <h6 class="card-subtitle mb-2 text-muted">The predicted terrain is: {{results}}.</h6>
+              <h6 id="output" class="card-subtitle mb-2 text-muted">The predicted terrain is: {{results}}.</h6>
               <div class="text-center">
-                <img id="img" src="{% static 'bricks.jpeg' %}" class="rounded" alt="...">
+                <img id="img" src="" class="rounded" alt="...">
               </div>
             </div>
           </div>
@@ -28,5 +28,53 @@
     <!--Bootstrap bundle-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     
+    <!--Script to change image based on model prediction-->
+    <script>
+      $(document).ready(function(){
+
+        if($("#output:contains('Bricks')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'bricks.jpeg'%}");
+          console.log('Bricks loaded');
+        }
+         
+        if($("#output:contains('Epoxy')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'epoxy.png'%}");
+          console.log('Epoxy loaded');
+        }
+
+        if($("#output:contains('Grass')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'grass.jpeg'%}");
+          console.log('Grass loaded');
+        }
+
+        if($("#output:contains('Dirt')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'dirt.jpg'%}");
+          console.log('Dirt loaded');
+        }
+
+        if($("#output:contains('Stone')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'stone.jpg'%}");
+          console.log('Stone loaded');
+        }
+
+        if($("#output:contains('Tarmac')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'tarmac.jpg'%}");
+          console.log('Tarmac loaded');
+        } 
+
+        if($("#output:contains('Tarmac')").length > 0)
+        {
+          $(".rounded").attr("src", "{% static 'tarmac.jpg'%}");
+          console.log('Tarmac loaded');
+        } 
+        
+      });
+    </script>
 </body>
 </html>
