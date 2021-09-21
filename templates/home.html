@@ -38,8 +38,8 @@
                     
                     <form action="{% url 'predict' %}" method="post" enctype="multipart/form-data">
                       {% csrf_token %}
-                      <input type="file" name="document">
-                      <button type="submit" value="Predict">Upload</button>
+                      <input class="btn btn-primary btn-lg" type="file" name="document">
+                      <button class="btn btn-secondary btn-lg" type="submit" value="Predict">Upload</button>
                     </form>
                   </div>
                 </div>

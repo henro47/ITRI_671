@@ -46,6 +46,17 @@ def get_category(index):
     elif(index == 5):
         return 'Tarmac'
 
+def to_dataFrame(np_array):
+    df = pd.DataFrame(np_array, columns = ['Bricks','Epoxy','Grass','Dirt','Stone','Tarmac'])
+    return df
+
+def to_dictionary(df):
+    data = []
+    for i in range(df.shape[0]):
+        temp = df.iloc[i]
+        data.append(dict(temp))
+    return data
+
 #VIEWS
 
 def home(request):
@@ -53,14 +64,19 @@ def home(request):
 
 def prediction(request):
     category = "CAT"
+    data_dict = ""
     if(request.method == 'POST'):
         uploaded_file = request.FILES['document']
         model = load_model('ITRI_671\keras_model')
         df = pd.read_csv(uploaded_file, delimiter=',', header=None)
         pred = predict(model, df)
+   
         index = tf.argmax(pred, axis=1)
         category = get_category(index)
+
+        pred_df = to_dataFrame(pred)
+        data_dict = to_dictionary(pred_df)
            
-    return render(request, "prediction.html",{'results':category})
+    return render(request, "prediction.html",{'results':category,'data':data_dict})
 
 	
