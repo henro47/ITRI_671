@@ -52,32 +52,15 @@ def home(request):
     return render(request, 'home.html')
 
 def prediction(request):
-    model = load_model('ITRI_671\keras_model')
-    input_data = []
-
-    input_data.append(float(request.GET.get('t_h',1)))
-    input_data.append(float(request.GET.get('t_p',1)))
-    input_data.append(float(request.GET.get('pr',1)))
-    input_data.append(float(request.GET.get('hu',1)))
-    input_data.append(float(request.GET.get('yw',1)))
-    input_data.append(float(request.GET.get('pi',1)))
-    input_data.append(float(request.GET.get('ro',1)))
-    input_data.append(float(request.GET.get('m_x',1)))
-    input_data.append(float(request.GET.get('m_y',1)))
-    input_data.append(float(request.GET.get('m_z',1)))
-    input_data.append(float(request.GET.get('acc_x',1)))
-    input_data.append(float(request.GET.get('acc_y',1)))
-    input_data.append(float(request.GET.get('acc_z',1)))
-    input_data.append(float(request.GET.get('gy_x',1)))
-    input_data.append(float(request.GET.get('gy_y',1)))
-    input_data.append(float(request.GET.get('gy_z',1)))
-
-    df = pd.DataFrame([input_data])
-    pred = predict(model, df)
-    
-    index = tf.argmax(pred, axis=1)
-    category = get_category(index)
-    
-    return render(request, "prediction.html", {'results':category})
+    category = "CAT"
+    if(request.method == 'POST'):
+        uploaded_file = request.FILES['document']
+        model = load_model('ITRI_671\keras_model')
+        df = pd.read_csv(uploaded_file, delimiter=',', header=None)
+        pred = predict(model, df)
+        index = tf.argmax(pred, axis=1)
+        category = get_category(index)
+           
+    return render(request, "prediction.html",{'results':category})
 
 	
