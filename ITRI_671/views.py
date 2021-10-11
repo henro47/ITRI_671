@@ -70,6 +70,8 @@ def prediction(request):
         model = load_model('ITRI_671\keras_model')
         df = pd.read_csv(uploaded_file, delimiter=',', header=None)
         pred = predict(model, df)
+
+        pred.round(decimals=3, out=pred)
    
         index = tf.argmax(pred, axis=1)
         category = get_category(index)
