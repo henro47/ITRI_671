@@ -48,6 +48,13 @@ def get_category(index):
 
 def to_dataFrame(np_array):
     df = pd.DataFrame(np_array, columns = ['Bricks','Epoxy','Grass','Dirt','Stone','Tarmac'])
+    per_df = dataframe_percentages(df)
+    return per_df
+
+def dataframe_percentages(df):
+    for col in df:
+        percentage = round(df[col] * 100,3) 
+        df[col] = percentage
     return df
 
 def to_dictionary(df):
@@ -70,8 +77,6 @@ def prediction(request):
         model = load_model('ITRI_671\keras_model')
         df = pd.read_csv(uploaded_file, delimiter=',', header=None)
         pred = predict(model, df)
-
-        pred.round(decimals=3, out=pred)
    
         index = tf.argmax(pred, axis=1)
         category = get_category(index)
